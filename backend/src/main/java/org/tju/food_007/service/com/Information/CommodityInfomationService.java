@@ -1,4 +1,4 @@
-package org.tju.food_007.service.com;
+package org.tju.food_007.service.com.Information;
 
 import lombok.Getter;
 import lombok.Setter;

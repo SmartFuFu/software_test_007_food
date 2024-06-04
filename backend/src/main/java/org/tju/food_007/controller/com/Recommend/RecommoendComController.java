@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.tju.food_007.dto.com.CommodityDetailDTO;
-import org.tju.food_007.dto.com.SearchCommodityResponseDTO;
-import org.tju.food_007.service.com.CommodityInfomationService;
+import org.tju.food_007.service.com.Information.CommodityInfomationService;
 import org.tju.food_007.service.com.Recommend.RecommendComService;
 
 import java.util.ArrayList;
