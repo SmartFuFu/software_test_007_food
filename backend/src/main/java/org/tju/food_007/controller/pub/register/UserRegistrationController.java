@@ -12,8 +12,8 @@ import org.tju.food_007.dto.pub.register.CustomRegistrationResponseDTO;
 import org.tju.food_007.dto.pub.register.StoreRegistrationRequestDTO;
 import org.tju.food_007.dto.pub.register.StoreRegistrationResponseDTO;
 import org.tju.food_007.repository.pub.register.CustomRegistrationRepository;
-import org.tju.food_007.service.CustomerRegistrationService;
-import org.tju.food_007.service.StoreRegistrationService;
+import org.tju.food_007.service.pub.register.CustomerRegistrationService;
+import org.tju.food_007.service.pub.register.StoreRegistrationService;
 
 /**
  * @author WGY
@@ -35,7 +35,7 @@ public class UserRegistrationController {
     public ResponseEntity<CustomRegistrationResponseDTO> CusRegister (@RequestBody CustomRegistrationRequestDTO request) {
         CustomRegistrationResponseDTO response=new CustomRegistrationResponseDTO();
         CustomRegistrationResponseDTO temp=customerRegistrationService.UserRegister(request);
-        response=customerRegistrationService.CusRegister(request, temp.getUser_id());
+        response=customerRegistrationService.CusRegister(request, temp);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
