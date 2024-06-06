@@ -4,7 +4,7 @@ package org.tju.food_007.service.com.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tju.food_007.dto.com.*;
-import org.tju.food_007.repository.com.CommoditySearchRepository;
+import org.tju.food_007.repository.com.Search.CommoditySearchRepository;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

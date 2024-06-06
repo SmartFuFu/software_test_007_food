@@ -1,4 +1,4 @@
-package org.tju.food_007.repository.com;
+package org.tju.food_007.repository.com.Search;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

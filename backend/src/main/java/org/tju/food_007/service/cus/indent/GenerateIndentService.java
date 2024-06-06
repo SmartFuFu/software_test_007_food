@@ -12,7 +12,7 @@ import org.tju.food_007.model.CommodityEntity;
 import org.tju.food_007.model.IndentCommodityEntity;
 import org.tju.food_007.model.IndentEntity;
 import org.tju.food_007.model.UserEntity;
-import org.tju.food_007.repository.com.CommodityDetailRepository;
+import org.tju.food_007.repository.com.Information.CommodityDetailRepository;
 import org.tju.food_007.repository.cus.indent.GenerateIndentComRepository;
 import org.tju.food_007.repository.cus.indent.GenerateIndentRepository;
 import org.tju.food_007.repository.pub.login.UserLoginRepository;
