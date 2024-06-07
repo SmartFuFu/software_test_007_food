@@ -51,7 +51,6 @@ public class GenerateIndentService {
         IndentEntity aimed_ind=generateIndentRepository.findByIndId(requestDTO.getInd_id());
         aimed_ind.setIndState(requestDTO.getInd_state());
         generateIndentRepository.save(aimed_ind);
-        return;
     }
 
     @Transactional
@@ -88,10 +87,8 @@ public class GenerateIndentService {
             CommodityEntity aim_com=commodityDetailRepository.findByComId(newCom.getComId());
             aim_com.setComLeft(aim_com.getComLeft()-Integer.parseInt(com.getInd_quantity()));
             commodityDetailRepository.save(aim_com);
-            IndentCommodityEntity inserted_com=generateIndentComRepository.save(newCom);
+            generateIndentComRepository.save(newCom);
         }
-
-        IndentCommodity dto =new IndentCommodity();
 
         return "订单生成成功";
     }

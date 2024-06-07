@@ -6,23 +6,20 @@ import org.tju.food_007.dto.cus.indent.GetIndentResponseDTO;
 import org.tju.food_007.dto.cus.indent.IndentComInfo;
 import org.tju.food_007.dto.cus.mapper.GenerateIndentComRequstMapper;
 import org.tju.food_007.dto.cus.mapper.GenerateIndentRequestMapper;
-import org.tju.food_007.model.IndentCommodityEntity;
-import org.tju.food_007.model.IndentEntity;
-import org.tju.food_007.repository.cus.indent.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.tju.food_007.dto.com.SearchCommodityResponseDTO;
-import org.tju.food_007.dto.cus.indent.GetIndRequestDTO;
-import org.tju.food_007.dto.cus.indent.GetIndResponseDTO;
-import org.tju.food_007.dto.cus.indent.mapper.GetIndResponseMapper;
-import org.tju.food_007.model.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.tju.food_007.dto.cus.indent.GetIndRequestDTO;
+import org.tju.food_007.dto.cus.indent.GetIndResponseDTO;
+import org.tju.food_007.dto.cus.indent.mapper.GetIndResponseMapper;
+import org.tju.food_007.model.*;
+import org.tju.food_007.repository.cus.indent.*;
+
+
+
 import java.util.Objects;
 
 /**
@@ -81,7 +78,7 @@ public class GetIndentService {
         }
 
         for(IndentEntity indent : indents){
-            GetIndResponseDTO tempDTO = new GetIndResponseDTO();
+            GetIndResponseDTO tempDTO ;
 
             List<GetIndResponseDTO.IndComDTO> tempComDTOs =new ArrayList<>();
             int sto_id=0;

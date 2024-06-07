@@ -83,7 +83,7 @@ public class StoreRegistrationService {
 
             newSto.setStoId(temp.getUserId());
             newSto.setStoState(1);
-            StoreEntity tempSto = storeRegistrationRepository.save(newSto);
+            storeRegistrationRepository.save(newSto);
             response.setMsg("Store成功注册");
             response.setUser_type(1);
             response.setUser_id(temp.getUserId());

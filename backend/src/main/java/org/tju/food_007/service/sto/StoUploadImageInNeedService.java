@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.tju.food_007.dto.sto.StoUploadImageInNeedRequestDTO;
-import org.tju.food_007.dto.sto.StoUploadImageRequestDTO;
-import org.tju.food_007.model.CommodityImageEntity;
+
 import org.tju.food_007.model.StoreImageEntity;
 import org.tju.food_007.model.StoreLicenseEntity;
 import org.tju.food_007.repository.sto.StoUploadStoImagesRepository;

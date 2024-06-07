@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.tju.food_007.dto.sto.StoCategoriesOnsaleResponseDTO;
-import org.tju.food_007.repository.sto.StoGetIndListRepository;
+
 import org.tju.food_007.service.sto.StoGetIndentListService;
-import org.tju.food_007.service.sto.StocategoriesService;
+
 
 import java.util.ArrayList;
 

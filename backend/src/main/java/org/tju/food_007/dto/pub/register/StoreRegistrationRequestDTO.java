@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Time;
-import java.time.LocalTime;
+
 
 /**
  * @author WGY
  * @create 2024-03-10-11:51
  */
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalTime;
+
 @Getter
 @Setter
 public class StoreRegistrationRequestDTO {

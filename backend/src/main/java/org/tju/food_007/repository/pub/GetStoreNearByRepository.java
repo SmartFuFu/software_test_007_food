@@ -1,7 +1,7 @@
 package org.tju.food_007.repository.pub;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+
 import org.tju.food_007.model.StoreEntity;
 
 import java.util.List;

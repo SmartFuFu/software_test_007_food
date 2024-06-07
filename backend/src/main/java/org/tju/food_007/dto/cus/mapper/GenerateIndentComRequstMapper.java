@@ -4,8 +4,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.cus.indent.IndentCommodity;
 import org.tju.food_007.model.IndentCommodityEntity;
-import org.mapstruct.factory.Mappers;
-import org.tju.food_007.model.UserEntity;
+
 
 import java.math.BigDecimal;
 

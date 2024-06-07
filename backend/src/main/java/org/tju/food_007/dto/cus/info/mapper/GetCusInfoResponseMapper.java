@@ -1,6 +1,6 @@
 package org.tju.food_007.repository.cus.info;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.tju.food_007.dto.cus.info.GetCusInfoResponseDTO;
 import org.tju.food_007.model.UserEntity;
 

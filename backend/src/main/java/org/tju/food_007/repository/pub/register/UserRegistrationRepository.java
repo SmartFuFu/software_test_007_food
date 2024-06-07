@@ -10,5 +10,4 @@ import org.tju.food_007.model.UserEntity;
 public interface UserRegistrationRepository extends JpaRepository <UserEntity,Integer>{
     public boolean existsByUserPhone(String user_phone);
     public boolean existsByUserId(Integer cus_id);
-;
 }

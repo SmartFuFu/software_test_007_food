@@ -1,7 +1,6 @@
 package org.tju.food_007.repository.pub.login;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.tju.food_007.model.CustomerEntity;
 import org.tju.food_007.model.UserEntity;
 
 /**

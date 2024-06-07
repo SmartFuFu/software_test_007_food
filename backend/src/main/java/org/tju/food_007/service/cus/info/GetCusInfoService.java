@@ -8,9 +8,7 @@ import org.tju.food_007.model.UserEntity;
 import org.tju.food_007.repository.cus.info.GetCusInfoRepository;
 import org.tju.food_007.repository.cus.info.GetCusInfoResponseMapper;
 import org.tju.food_007.repository.cus.info.GetUserInfoRepository;
-import org.tju.food_007.service.cus.indent.GetIndentService;
 
-import java.util.Optional;
 
 /**
  * @author WGY

@@ -3,8 +3,7 @@ package org.tju.food_007.service.cus.indent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tju.food_007.dto.cus.indent.GenerateIndentRequestDTO;
-import org.tju.food_007.dto.cus.indent.IndentCommodity;
+
 import org.tju.food_007.dto.cus.indent.RatingRequestDTO;
 import org.tju.food_007.dto.cus.mapper.GenerateIndentComRequstMapper;
 import org.tju.food_007.dto.cus.mapper.GenerateIndentRequestMapper;

@@ -1,20 +1,19 @@
 package org.tju.food_007.service.pub;
 
-import lombok.Setter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tju.food_007.dto.pub.GetDistanceRequestDTO;
 import org.tju.food_007.dto.pub.GetDistanceResponseDTO;
-import org.tju.food_007.dto.pub.GetStoreNearByRequestDTO;
-import org.tju.food_007.dto.pub.GetStoreNearByResponseDTO;
+
 import org.tju.food_007.model.StoreEntity;
 import org.tju.food_007.repository.pub.GetDistanceRepository;
-import org.tju.food_007.repository.pub.GetStoreNearByRepository;
+
 import org.tju.food_007.utils.GeoService;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * @author WGY

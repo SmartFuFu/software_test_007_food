@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tju.food_007.model.CommodityEntity;
 import org.tju.food_007.model.IndentCommodityEntity;
-import org.tju.food_007.model.IndentEntity;
-import org.tju.food_007.repository.cus.indent.GenerateIndentRepository;
+
 import org.tju.food_007.repository.sto.StoGeComListRepository;
 import org.tju.food_007.repository.sto.StoGetIndListRepository;
 
