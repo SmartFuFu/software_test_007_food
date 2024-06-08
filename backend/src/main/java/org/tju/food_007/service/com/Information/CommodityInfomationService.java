@@ -32,6 +32,11 @@ public class CommodityInfomationService {
     public CommodityDetailDTO getCommodityDetail(Integer com_id){
         CommodityDetailDTO commodityDetailDTO = new CommodityDetailDTO();
 
+        if(com_id<1){
+            commodityDetailDTO.setCom_ID(-1);
+            return commodityDetailDTO;
+        }
+
         List<Object[]> objects = commodityDetailRepository.getCommodityDetail(com_id);
 
         if(objects.isEmpty()){
