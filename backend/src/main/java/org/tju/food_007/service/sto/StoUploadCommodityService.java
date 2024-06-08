@@ -71,7 +71,7 @@ public class StoUploadCommodityService {
             newComCategory.setComId(inserted_com.getComId());
             stoSetComCategoryRepository.save(newComCategory);
         }
-        //TODO：商品评分计算的触发器
+
         StoUploadMysteryCommodityResponseDTO responseDTO=new StoUploadMysteryCommodityResponseDTO();
         responseDTO.setCom_Id(inserted_com.getComId());
         return responseDTO;
@@ -99,7 +99,7 @@ public class StoUploadCommodityService {
     public void UploadCommodityImage(StoUploadImageRequestDTO formDTO) throws IOException {
         Integer com_image_index=0;
         System.out.println("formDTO.getCom_id() ： "+formDTO.getCom_id());
-        //TODO:判断该id是否存在
+
         for(MultipartFile image_file : formDTO.getImages()){
             InputStream image_obs=image_file.getInputStream();
             String file_name=String.valueOf(formDTO.getCom_id())+"_"+String.valueOf(com_image_index)+".jpg";
@@ -118,6 +118,6 @@ public class StoUploadCommodityService {
         java.util.Date parsedExDate = dateFormat.parse(data);
         return new Timestamp(parsedExDate.getTime());
     }
-    //TODO：上传商品的图片，并且设置盲盒商品的图片
+
 }
-//TODO:商品上传怎么存储，涉及云存储，and 路径设置，需要和fjh交流
+

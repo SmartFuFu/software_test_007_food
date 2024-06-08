@@ -31,7 +31,7 @@ public class StoUploadImageInNeedService {
     public void UploadStoImage(StoUploadImageInNeedRequestDTO formDTO) throws IOException {
         Integer sto_image_index=0;
         System.out.println("formDTO.getSto_id() ： "+formDTO.getSto_id());
-        //TODO:判断该id是否存在
+
         for(MultipartFile image_file : formDTO.getImages()){
             InputStream image_obs=image_file.getInputStream();
             String file_name=String.valueOf(formDTO.getSto_id())+"_"+String.valueOf(sto_image_index)+".jpg";
@@ -47,7 +47,7 @@ public class StoUploadImageInNeedService {
     public void UploadStoLicenseImage(StoUploadImageInNeedRequestDTO formDTO) throws IOException {
         Integer sto_image_index=0;
         System.out.println("formDTO.getSto_id() ： "+formDTO.getSto_id());
-        //TODO:判断该id是否存在
+
         for(MultipartFile image_file : formDTO.getImages()){
             InputStream image_obs=image_file.getInputStream();
             String file_name=String.valueOf(formDTO.getSto_id())+"_"+String.valueOf(sto_image_index)+".jpg";

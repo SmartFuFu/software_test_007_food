@@ -30,7 +30,7 @@ public class StoreRegistrationService {
 
     private static final Pattern PHONE_PATTERN = Pattern.compile("^\\d{11}$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9\\W]{6,}$");
-   
+
     @Transactional
     public CustomRegistrationResponseDTO StoreRegister(StoreRegistrationRequestDTO request) {
         CustomRegistrationResponseDTO response = new CustomRegistrationResponseDTO();

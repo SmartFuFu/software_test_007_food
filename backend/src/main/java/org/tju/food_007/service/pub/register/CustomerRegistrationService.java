@@ -91,7 +91,7 @@ public class CustomerRegistrationService {
         formattedDateTime = now.format(formatter);
         newUser.setUserState(1);
         newUser.setUserBalance(BigDecimal.valueOf(0));
-        //TODO:不知道时间行不行
+
         newUser.setUserRegTime(Timestamp.valueOf(now));
         newUser.setUserType(0);
         if (userRegistrationRepository.existsByUserPhone(newUser.getUserPhone())) {

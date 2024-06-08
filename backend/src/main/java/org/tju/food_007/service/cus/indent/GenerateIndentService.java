@@ -18,15 +18,8 @@ import org.tju.food_007.repository.cus.indent.GenerateIndentRepository;
 import org.tju.food_007.repository.pub.login.UserLoginRepository;
 import org.tju.food_007.repository.sto.UserUploadLogoImageUserRepository;
 
-/**
- * @author WGY
- * @create 2024-03-17-16:00
- */
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.UUID;
-
-
 
 @Service
 public class GenerateIndentService {
@@ -40,83 +33,129 @@ public class GenerateIndentService {
     UserUploadLogoImageUserRepository userUploadLogoImageUserRepository;
     @Autowired
     CommodityDetailRepository commodityDetailRepository;
-    private final GenerateIndentComRequstMapper generateIndentComRequstMapper=GenerateIndentComRequstMapper.INSTANCE;
-    private final GenerateIndentRequestMapper generateIndentRequestMapper=GenerateIndentRequestMapper.INSTANCE;
+    private final GenerateIndentComRequstMapper generateIndentComRequstMapper = GenerateIndentComRequstMapper.INSTANCE;
+    private final GenerateIndentRequestMapper generateIndentRequestMapper = GenerateIndentRequestMapper.INSTANCE;
 
     public static String generateVerificationCode() {
         return UUID.randomUUID().toString().replace("-", "");
     }
+
     @Transactional
-    public void ChangeIndentState(ChangeIndStateRequestDTO requestDTO){
-        IndentEntity aimed_ind=generateIndentRepository.findByIndId(requestDTO.getInd_id());
+    public void ChangeIndentState(ChangeIndStateRequestDTO requestDTO) {
+        IndentEntity aimed_ind = generateIndentRepository.findByIndId(requestDTO.getInd_id());
         aimed_ind.setIndState(requestDTO.getInd_state());
         generateIndentRepository.save(aimed_ind);
-        return;
     }
 
     @Transactional
-    public String GenerateIndent(GenerateIndentRequestDTO requestDTO){
-        UserEntity targetUser=userUploadLogoImageUserRepository.findByUserId(Integer.valueOf(requestDTO.getCus_Id()));
-        if(targetUser.getUserBalance().doubleValue()<requestDTO.getInd_money()){
+    public String GenerateIndent(GenerateIndentRequestDTO requestDTO) {
+        // 综合判断逻辑
+        String validationError = validateGenerateIndentRequest(requestDTO);
+        if (validationError != null) {
+            return validationError;
+        }
+
+        UserEntity targetUser = userUploadLogoImageUserRepository.findByUserId(Integer.valueOf(requestDTO.getCus_Id()));
+        if (targetUser == null) {
+            return "顾客ID不存在";
+        }
+
+        if(targetUser.getUserType()==1){
+            return "顾客ID不存在";
+        }
+
+        if (targetUser.getUserBalance().doubleValue() < requestDTO.getInd_money()) {
             System.out.println("余额不足");
             return "余额不足";
         }
-        String telephoneNumber=String.valueOf(targetUser.getUserPhone().subSequence(7,11));
-        String teleCode=telephoneNumber+"-"+String.valueOf(generateVerificationCode().subSequence(0,4));
-        IndentEntity newIndent=generateIndentRequestMapper.dtoToEntity(requestDTO);
+
+        String telephoneNumber = String.valueOf(targetUser.getUserPhone().subSequence(7, 11));
+        String teleCode = telephoneNumber + "-" + String.valueOf(generateVerificationCode().subSequence(0, 4));
+        IndentEntity newIndent = generateIndentRequestMapper.dtoToEntity(requestDTO);
         newIndent.setIndVerificationCode(teleCode);
         newIndent.setFoodQualityScore(BigDecimal.valueOf(5.0));
         newIndent.setServiceQualityScore(BigDecimal.valueOf(5.0));
         newIndent.setPricePerformanceRatio(BigDecimal.valueOf(5.0));
-        if(newIndent.getDeliveryMethod()==0){
+        if (newIndent.getDeliveryMethod() == 0) {
             newIndent.setIndState(2);
-        }
-        else if(newIndent.getDeliveryMethod()==1){
+        } else if (newIndent.getDeliveryMethod() == 1) {
             newIndent.setIndState(0);
-        }
-        else {
+        } else {
             System.out.println("出现了问题");
+            return "出现了问题";
         }
-        CommodityEntity aimed_com=commodityDetailRepository.findByComId(Integer.valueOf(requestDTO.getCom_arr().getFirst().getCom_id()));
+        CommodityEntity aimed_com = commodityDetailRepository.findByComId(Integer.valueOf(requestDTO.getCom_arr().getFirst().getCom_id()));
+        if (aimed_com == null) {
+            return String.format("商品ID %s不存在", requestDTO.getCom_arr().getFirst().getCom_id());
+        }
         newIndent.setStoId(aimed_com.getStoId());
-        IndentEntity inserted_ind=generateIndentRepository.save(newIndent);
+        IndentEntity inserted_ind = generateIndentRepository.save(newIndent);
+
         for (IndentCommodity com : requestDTO.getCom_arr()) {
-            IndentCommodityEntity newCom= generateIndentComRequstMapper.dtoToEntity(com);
+            IndentCommodityEntity newCom = generateIndentComRequstMapper.dtoToEntity(com);
             System.out.println(newCom.getComId());
             newCom.setIndId(inserted_ind.getIndId());
             newCom.setRatingType(1);
-            CommodityEntity aim_com=commodityDetailRepository.findByComId(newCom.getComId());
-            aim_com.setComLeft(aim_com.getComLeft()-Integer.parseInt(com.getInd_quantity()));
+            CommodityEntity aim_com = commodityDetailRepository.findByComId(newCom.getComId());
+            if (aim_com == null) {
+                return String.format("商品ID %s不存在", com.getCom_id());
+            }
+            aim_com.setComLeft(aim_com.getComLeft() - Integer.parseInt(com.getInd_quantity()));
             commodityDetailRepository.save(aim_com);
-            IndentCommodityEntity inserted_com=generateIndentComRepository.save(newCom);
+            generateIndentComRepository.save(newCom);
         }
-
-        IndentCommodity dto =new IndentCommodity();
 
         return "订单生成成功";
     }
 
-    @Transactional
-    public String ModifyCode(){
-        ArrayList<IndentEntity> indents=generateIndentRepository.findAll();
-        for(IndentEntity ind : indents){
-            UserEntity user=userLoginRepository.findByUserId(ind.getCusId());
-            String telephoneNumber=String.valueOf(user.getUserPhone().subSequence(7,11));
-            String teleCode=telephoneNumber+"-"+String.valueOf(generateVerificationCode().subSequence(0,4));
-            ind.setIndVerificationCode(teleCode);
-            generateIndentRepository.save(ind);
+    private String validateGenerateIndentRequest(GenerateIndentRequestDTO requestDTO) {
+        try {
+            int cusId = Integer.parseInt(requestDTO.getCus_Id());
+            if (cusId <= 0) throw new NumberFormatException("无效的客户ID");
+        } catch (NumberFormatException e) {
+            return "无效的客户ID";
         }
-        return "success";
-    }
 
-    @Transactional
-    public String ModifyStoID(){
-        ArrayList<IndentEntity> indents=generateIndentRepository.findAll();
-        for(IndentEntity ind : indents){
-            ArrayList<IndentCommodityEntity> list= generateIndentComRepository.findByIndId(ind.getIndId());
-            CommodityEntity com= commodityDetailRepository.findByComId(list.getFirst().getComId());
-            ind.setStoId(com.getStoId());
+        if (requestDTO.getInd_notes().length() > 50) {
+            return "备注长度超出限制";
         }
-        return "success";
+
+        if (requestDTO.getDelivery_method() < 0 || requestDTO.getDelivery_method() > 1) {
+            return "无效的配送方式";
+        }
+
+        if (requestDTO.getInd_money() < 0 || requestDTO.getInd_money() >= 10000) {
+            return "无效的订单金额";
+        }
+
+        if (requestDTO.getDelivery_altitude() < 0 || requestDTO.getDelivery_altitude() > 90 ||
+                requestDTO.getDelivery_longitude() < 0 || requestDTO.getDelivery_longitude() > 180) {
+            return "无效的配送位置坐标";
+        }
+
+        for (IndentCommodity com : requestDTO.getCom_arr()) {
+            try {
+                int comId = Integer.parseInt(com.getCom_id());
+                if (comId <= 0) throw new NumberFormatException("无效的商品ID");
+            } catch (NumberFormatException e) {
+                return "无效的商品ID";
+            }
+
+            try {
+                int quantity = Integer.parseInt(com.getInd_quantity());
+                if (quantity <= 0 || quantity >= 10000) throw new NumberFormatException("无效的商品数量");
+            } catch (NumberFormatException e) {
+                return "无效的商品数量";
+            }
+
+            try {
+                double money = Double.parseDouble(com.getCommodity_money());
+                if (money < 0 || money >= 10000) throw new NumberFormatException("无效的商品金额");
+            } catch (NumberFormatException e) {
+                return "无效的商品金额";
+            }
+        }
+
+        return null;
     }
 }
