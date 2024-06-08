@@ -3,8 +3,11 @@ package org.tju.food_007.service.com.Search;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tju.food_007.dto.com.*;
-import org.tju.food_007.repository.com.CommoditySearchRepository;
+
+import org.tju.food_007.dto.com.CommodityPriceCurveResponseDTO;
+import org.tju.food_007.dto.com.SearchCommodityRequestDTO;
+import org.tju.food_007.dto.com.SearchCommodityResponseDTO;
+import org.tju.food_007.repository.com.Search.CommoditySearchRepository;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -34,7 +37,7 @@ public class CommoditySearchService {
         else if (request.getSort_by()==1) {sort_by="PRAISE_RATE";}
         else if (request.getSort_by()==2) {sort_by="COM_UPLOADDATE";}
 
-        List<Object[]> objects=new ArrayList<>();
+        List<Object[]> objects;
 
         if(request.getCom_type() ==null){
             System.out.println("无商品类别查询");

@@ -3,12 +3,13 @@ package org.tju.food_007.service.com.mysterybox;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tju.food_007.dto.com.SearchCommodityResponseDTO;
+
 import org.tju.food_007.dto.com.mysterybox.GetMysteryboxRequestDTO;
 import org.tju.food_007.dto.com.mysterybox.GetMysteryboxResponseDTO;
 import org.tju.food_007.dto.com.mysterybox.mapper.GetMysteryboxResponseMapper;
 import org.tju.food_007.model.*;
 import org.tju.food_007.repository.com.mysterybox.*;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,19 +24,19 @@ public class GetMysteryboxDetailService {
              GetMysteryboxResponseMapper.INSTANCE;
 
      @Autowired
-    CommodityImageRepository commodityImageRepository;
+     CommodityImageRepository commodityImageRepository;
 
      @Autowired
-    CommodityRepository commodityRepository;
+     CommodityRepository commodityRepository;
 
      @Autowired
-    MysteryBoxRepository mysteryBoxRepository;
+     MysteryBoxRepository mysteryBoxRepository;
 
      @Autowired
-    StoreReposirory storeReposirory;
+     StoreReposirory storeReposirory;
 
      @Autowired
-    UserRepository userRepository;
+     UserRepository userRepository;
 
 
     public List<GetMysteryboxResponseDTO> getMysteryboxList(GetMysteryboxRequestDTO request){
@@ -82,7 +83,7 @@ public class GetMysteryboxDetailService {
         }
 
         //返回所有盲盒
-        List<CommodityEntity> commodities = new ArrayList<>();
+        List<CommodityEntity> commodities ;
 
         if(request.getSto_ID()!=null){
             commodities=commodityRepository.findAllByStoIdAndComType(request.getSto_ID(),1);

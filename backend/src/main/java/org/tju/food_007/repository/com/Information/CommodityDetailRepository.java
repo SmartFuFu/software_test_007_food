@@ -1,13 +1,9 @@
-package org.tju.food_007.repository.com;
+package org.tju.food_007.repository.com.Information;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-import org.tju.food_007.dto.com.CommodityDetailDTO;
 import org.tju.food_007.model.CommodityEntity;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public interface CommodityDetailRepository extends JpaRepository<CommodityEntity,Integer> {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tju.food_007.dto.pub.register.CustomRegistrationRequestDTO;
 import org.tju.food_007.dto.pub.register.CustomRegistrationResponseDTO;
 import org.tju.food_007.dto.pub.register.StoreRegistrationRequestDTO;
-import org.tju.food_007.dto.pub.register.StoreRegistrationResponseDTO;
 import org.tju.food_007.repository.pub.register.CustomRegistrationRepository;
 import org.tju.food_007.service.pub.register.CustomerRegistrationService;
 import org.tju.food_007.service.pub.register.StoreRegistrationService;
@@ -33,9 +32,8 @@ public class UserRegistrationController {
     StoreRegistrationService storeRegistrationService;
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public ResponseEntity<CustomRegistrationResponseDTO> CusRegister (@RequestBody CustomRegistrationRequestDTO request) {
-        CustomRegistrationResponseDTO response=new CustomRegistrationResponseDTO();
         CustomRegistrationResponseDTO temp=customerRegistrationService.UserRegister(request);
-        response=customerRegistrationService.CusRegister(request, temp);
+        CustomRegistrationResponseDTO response=customerRegistrationService.CusRegister(request, temp);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 

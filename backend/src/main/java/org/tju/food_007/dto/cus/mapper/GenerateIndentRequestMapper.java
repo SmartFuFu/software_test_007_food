@@ -3,12 +3,10 @@ package org.tju.food_007.dto.cus.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.cus.indent.GenerateIndentRequestDTO;
-import org.tju.food_007.dto.pub.register.CustomRegistrationRequestDTO;
-import org.tju.food_007.model.CustomerEntity;
+
 import org.tju.food_007.model.IndentEntity;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
-import org.tju.food_007.model.UserEntity;
+
 
 /**
  * @author WGY

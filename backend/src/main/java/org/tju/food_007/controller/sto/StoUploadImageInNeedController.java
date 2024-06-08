@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.tju.food_007.dto.pub.NormalResponseDTO;
 import org.tju.food_007.dto.sto.StoUploadImageInNeedRequestDTO;
-import org.tju.food_007.dto.sto.StoUploadImageRequestDTO;
+
 import org.tju.food_007.service.sto.StoUploadImageInNeedService;
 
 import java.io.IOException;

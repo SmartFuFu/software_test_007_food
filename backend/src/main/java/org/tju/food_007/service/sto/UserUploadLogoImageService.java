@@ -2,10 +2,9 @@ package org.tju.food_007.service.sto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.tju.food_007.dto.sto.StoUploadImageRequestDTO;
+
 import org.tju.food_007.dto.sto.UserUploadLogoImageRequestDTO;
-import org.tju.food_007.model.CommodityImageEntity;
+
 import org.tju.food_007.model.CustomerEntity;
 import org.tju.food_007.model.StoreEntity;
 import org.tju.food_007.model.UserEntity;

@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.cus.indent.GetIndResponseDTO;
-import org.tju.food_007.model.IndentCommodityEntity;
+
 import org.tju.food_007.model.IndentEntity;
 import org.tju.food_007.model.StoreEntity;
 import org.tju.food_007.model.UserEntity;

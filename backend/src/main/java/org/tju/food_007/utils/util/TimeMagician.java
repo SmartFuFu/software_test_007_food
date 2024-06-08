@@ -5,18 +5,15 @@ package org.tju.food_007.utils.util;
  * @create 2024-04-19-14:59
  */
 
-import cn.hutool.cron.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.stereotype.Component;
+
 import org.tju.food_007.model.IndentEntity;
 import org.tju.food_007.repository.cus.indent.GenerateIndentRepository;
 
-import java.io.IOException;
-import java.sql.Time;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

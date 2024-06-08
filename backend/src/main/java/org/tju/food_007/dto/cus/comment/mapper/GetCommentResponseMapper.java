@@ -6,7 +6,6 @@ import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.cus.comment.GetCommentResponseDTO;
 import org.tju.food_007.model.CommentEntity;
 import org.tju.food_007.model.CustomerEntity;
-import org.tju.food_007.model.IndentEntity;
 
 @Mapper
 public interface GetCommentResponseMapper {

@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.tju.food_007.dto.pub.GetDistanceRequestDTO;
-import org.tju.food_007.dto.pub.GetDistanceResponseDTO;
+
 import org.tju.food_007.dto.pub.login.UserLoginRequestDTO;
 import org.tju.food_007.dto.pub.login.UserLoginResponseDTO;
 import org.tju.food_007.dto.pub.login.UserQuitRequestDTO;

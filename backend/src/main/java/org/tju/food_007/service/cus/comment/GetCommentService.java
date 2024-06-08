@@ -9,7 +9,7 @@ import org.tju.food_007.repository.cus.comment.GetCommentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Service
 public class GetCommentService {

@@ -6,9 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.tju.food_007.dto.pub.GetStoreNearByRequestDTO;
 import org.tju.food_007.dto.pub.GetStoreNearByResponseDTO;
-import org.tju.food_007.dto.pub.register.CustomRegistrationRequestDTO;
-import org.tju.food_007.dto.pub.register.CustomRegistrationResponseDTO;
-import org.tju.food_007.repository.pub.GetStoreNearByRepository;
 import org.tju.food_007.service.pub.GetStoreNearByService;
 
 /**

@@ -4,18 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 import org.tju.food_007.dto.sto.*;
 import org.tju.food_007.service.sto.StoUploadCommodityService;
-import com.obs.services.ObsClient;
-import java.io.File;
+
 import java.io.IOException;
 import java.text.ParseException;
 
-import com.obs.services.ObsClient;
-import com.obs.services.ObsConfiguration;
-import com.obs.services.model.PutObjectRequest;
 
-import static org.tju.food_007.utils.ObsOperationTool.obsClient;
 
 /**
  * @author WGY

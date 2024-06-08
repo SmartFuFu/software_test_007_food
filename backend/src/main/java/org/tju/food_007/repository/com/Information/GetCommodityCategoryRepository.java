@@ -1,9 +1,8 @@
-package org.tju.food_007.repository.com;
+package org.tju.food_007.repository.com.Information;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.tju.food_007.model.CommoditiesCategoriesEntity;
 
-import java.util.ArrayList;
 
 /**
  * @author WGY

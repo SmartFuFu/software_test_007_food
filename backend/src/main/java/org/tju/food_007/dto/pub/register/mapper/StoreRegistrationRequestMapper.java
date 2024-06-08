@@ -3,9 +3,9 @@ package org.tju.food_007.dto.pub.register.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.tju.food_007.dto.pub.register.CustomRegistrationRequestDTO;
+
 import org.tju.food_007.dto.pub.register.StoreRegistrationRequestDTO;
-import org.tju.food_007.model.CustomerEntity;
+
 import org.tju.food_007.model.StoreEntity;
 import org.tju.food_007.model.UserEntity;
 

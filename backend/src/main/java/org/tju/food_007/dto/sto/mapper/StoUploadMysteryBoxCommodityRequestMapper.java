@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.sto.StoUploadMysteryBoxCommodityRequestDTO;
-import org.tju.food_007.dto.sto.StoUploadRegularCommodityRequestDTO;
+
 import org.tju.food_007.model.CommodityEntity;
 import org.tju.food_007.model.MysteryBoxEntity;
 

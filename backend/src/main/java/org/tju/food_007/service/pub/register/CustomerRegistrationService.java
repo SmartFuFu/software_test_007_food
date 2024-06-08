@@ -87,8 +87,6 @@ public class CustomerRegistrationService {
         // 输出格式化后的日期时间
         System.out.println("新顾客注册，当前时间为: " + formattedDateTime);
 
-        // 格式化当前日期时间
-        formattedDateTime = now.format(formatter);
         newUser.setUserState(1);
         newUser.setUserBalance(BigDecimal.valueOf(0));
 

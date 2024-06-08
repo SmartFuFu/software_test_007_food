@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+
 import org.tju.food_007.dto.sto.*;
 import org.tju.food_007.dto.sto.mapper.StoUploadMysteryBoxCommodityRequestMapper;
 import org.tju.food_007.dto.sto.mapper.StoUploadRegularCommodityRequestMapper;
 import org.tju.food_007.model.*;
 import org.tju.food_007.repository.sto.*;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +49,7 @@ public class StoUploadCommodityService {
             StoUploadRegularCommodityRequestMapper.INSTANCE;
 
     @Transactional
-    public  StoUploadMysteryCommodityResponseDTO UploadRegularCommodity(StoUploadRegularCommodityRequestDTO requestDTO) throws ParseException {
+    public StoUploadMysteryCommodityResponseDTO UploadRegularCommodity(StoUploadRegularCommodityRequestDTO requestDTO) throws ParseException {
         CommodityEntity newCom=stoUploadRegularCommodityRequestMapper.dtoToComEntity(requestDTO);
         RegularCommodityEntity newRegularCom=new RegularCommodityEntity();
         LocalDateTime nowTime=LocalDateTime.now();
@@ -56,7 +59,7 @@ public class StoUploadCommodityService {
         newRegularCom.setRegularComId(inserted_com.getComId());
         newRegularCom.setComExpirationDate(StrDataToTimestamp(requestDTO.getCom_expirationDate()));
         newRegularCom.setComProducedDate(StrDataToTimestamp(requestDTO.getCom_producedDate()));
-        RegularCommodityEntity inserted_regular_com=stoUploadRegularCommodityRepository.save(newRegularCom);
+        stoUploadRegularCommodityRepository.save(newRegularCom);
         for(PriceCurveInfo curveInfo : requestDTO.getPrice_curve()){
             CommodityPriceCurveEntity newPriceNode= new CommodityPriceCurveEntity();
             newPriceNode.setComId(inserted_com.getComId());
@@ -77,7 +80,7 @@ public class StoUploadCommodityService {
         return responseDTO;
     }
     @Transactional
-    public  StoUploadRegularCommodityResponseDTO UploadMysteryBoxCommodity(StoUploadMysteryBoxCommodityRequestDTO requestDTO){
+    public StoUploadRegularCommodityResponseDTO UploadMysteryBoxCommodity(StoUploadMysteryBoxCommodityRequestDTO requestDTO){
         CommodityEntity  newCom=
                 stoUploadMysteryBoxCommodityRequestMapper.dtoToComEntity(requestDTO);
         MysteryBoxEntity mysteryBox=

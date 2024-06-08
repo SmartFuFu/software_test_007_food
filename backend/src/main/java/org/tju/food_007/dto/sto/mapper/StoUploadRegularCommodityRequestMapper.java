@@ -4,19 +4,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.tju.food_007.dto.sto.StoUploadRegularCommodityRequestDTO;
 import org.tju.food_007.model.CommodityEntity;
-import org.tju.food_007.model.RegularCommodityEntity;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 @Mapper
 public interface StoUploadRegularCommodityRequestMapper {
     StoUploadRegularCommodityRequestMapper INSTANCE = Mappers.getMapper(StoUploadRegularCommodityRequestMapper.class);

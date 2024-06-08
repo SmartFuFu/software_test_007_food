@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.tju.food_007.dto.com.CommodityStatisticsDTO;
 import org.tju.food_007.dto.com.EditCommodity.EditCommodityRequestDTO;
 import org.tju.food_007.dto.com.EditCommodity.EditCommodityResponseDTO;
 import org.tju.food_007.service.com.EditCommodity.EditCommodityService;

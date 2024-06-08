@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.tju.food_007.dto.cus.indent.GenerateIndentRequestDTO;
 import org.tju.food_007.dto.cus.indent.RatingRequestDTO;
-import org.tju.food_007.service.cus.indent.GenerateIndentService;
 import org.tju.food_007.service.cus.indent.IndentRatingService;
 
 /**

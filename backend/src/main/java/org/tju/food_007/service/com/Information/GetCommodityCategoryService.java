@@ -3,7 +3,7 @@ package org.tju.food_007.service.com.Information;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tju.food_007.model.CommoditiesCategoriesEntity;
-import org.tju.food_007.repository.com.GetCommodityCategoryRepository;
+import org.tju.food_007.repository.com.Information.GetCommodityCategoryRepository;
 
 import java.util.ArrayList;
 
