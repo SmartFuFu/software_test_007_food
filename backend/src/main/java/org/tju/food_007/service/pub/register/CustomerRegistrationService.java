@@ -105,34 +105,55 @@ public class CustomerRegistrationService {
             response.setUser_type(0);
             response.setUser_id(temp.getUserId());
         }
-        return response;
-    }
 
-    @Transactional
-    public CustomRegistrationResponseDTO CusRegister(CustomRegistrationRequestDTO request,CustomRegistrationResponseDTO cus){
         CustomerEntity newCus = customRegistrationRequestMapper.requestToCusEntity(request);
-        CustomRegistrationResponseDTO response=new CustomRegistrationResponseDTO();
-        if(cus.getUser_id()==-1){
-            response=cus;
+
+        if(response.getUser_id()==-1){
             return response;
         }
-        if(userRegistrationRepository.existsByUserId(cus.getUser_id())){
-            response.setMsg("对应ID的user存在:"+cus);
-            newCus.setCusId(cus.getUser_id());
+        if(userRegistrationRepository.existsByUserId(response.getUser_id())){
+            response.setMsg("对应ID的user存在:"+response);
+            newCus.setCusId(response.getUser_id());
             newCus.setCusState(1);
             System.out.println("newCus:"+newCus.getCusId());
             customRegistrationRepository.save(newCus);
             response.setMsg("顾客成功注册");
             response.setUser_type(0);
-            response.setUser_id(cus.getUser_id());
+            response.setUser_id(response.getUser_id());
         }
         else {
-            response.setMsg("对应ID的user不存在:"+cus);
+            response.setMsg("对应ID的user不存在:"+response);
             response.setUser_type(0);
             response.setUser_id(-1);
         }
         return response;
     }
+
+//    @Transactional
+//    public CustomRegistrationResponseDTO CusRegister(CustomRegistrationRequestDTO request,CustomRegistrationResponseDTO cus){
+//        CustomerEntity newCus = customRegistrationRequestMapper.requestToCusEntity(request);
+//        CustomRegistrationResponseDTO response=new CustomRegistrationResponseDTO();
+//        if(cus.getUser_id()==-1){
+//            response=cus;
+//            return response;
+//        }
+//        if(userRegistrationRepository.existsByUserId(cus.getUser_id())){
+//            response.setMsg("对应ID的user存在:"+cus);
+//            newCus.setCusId(cus.getUser_id());
+//            newCus.setCusState(1);
+//            System.out.println("newCus:"+newCus.getCusId());
+//            customRegistrationRepository.save(newCus);
+//            response.setMsg("顾客成功注册");
+//            response.setUser_type(0);
+//            response.setUser_id(cus.getUser_id());
+//        }
+//        else {
+//            response.setMsg("对应ID的user不存在:"+cus);
+//            response.setUser_type(0);
+//            response.setUser_id(-1);
+//        }
+//        return response;
+//    }
     private boolean isValidPhoneNumber(String phoneNumber) {
         return PHONE_PATTERN.matcher(phoneNumber).matches();
     }

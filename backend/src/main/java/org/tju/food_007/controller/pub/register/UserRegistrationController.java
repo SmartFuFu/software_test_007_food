@@ -32,8 +32,7 @@ public class UserRegistrationController {
     StoreRegistrationService storeRegistrationService;
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public ResponseEntity<CustomRegistrationResponseDTO> CusRegister (@RequestBody CustomRegistrationRequestDTO request) {
-        CustomRegistrationResponseDTO temp=customerRegistrationService.UserRegister(request);
-        CustomRegistrationResponseDTO response=customerRegistrationService.CusRegister(request, temp);
+        CustomRegistrationResponseDTO response=customerRegistrationService.UserRegister(request);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
