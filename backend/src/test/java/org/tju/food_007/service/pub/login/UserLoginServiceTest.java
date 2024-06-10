@@ -31,10 +31,11 @@ public class UserLoginServiceTest {
 
     @BeforeEach
     public void setUp() {
+        System.out.println("开始测试");
         MockitoAnnotations.openMocks(this);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "测试用例 {index}: 手机号={0}, 密码={1}, 预期消息={2}")
     @MethodSource("userLoginProvider")
     @DisplayName("测试用户登录")
     public void testUserLogin(String userPhone, String userPassword, String expectedMsg, Integer expectedUserType, Integer expectedUserId) {
@@ -78,4 +79,9 @@ public class UserLoginServiceTest {
                 Arguments.of("15821295304", "wrongpwd", "密码错误", -1, -1)
         );
     }
+
+
+
+
+
 }
