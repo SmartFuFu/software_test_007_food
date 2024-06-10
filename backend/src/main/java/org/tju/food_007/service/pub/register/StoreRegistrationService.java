@@ -40,6 +40,15 @@ public class StoreRegistrationService {
             return response;
         }
 
+        if (request.getSto_name().isEmpty() ||request.getSto_name().length()>20) {
+            response.setMsg("商家名称长度不正确");
+            return response;
+        }
+        if (request.getUser_address().isEmpty()) {
+            response.setMsg("商家地址不为空");
+            return response;
+        }
+
         if (!isValidPassword(request.getUser_password())) {
             response.setMsg("密码长度必须不低于6位，并且包含字母、数字和特殊符号");
             return response;
@@ -57,6 +66,21 @@ public class StoreRegistrationService {
 
         if (!isValidOpeningClosingTime(request.getSto_openingTime().toString(), request.getSto_closingTime().toString())) {
             response.setMsg("关门时间必须晚于开门时间");
+            return response;
+        }
+        try {
+            double stoLatitude = Double.parseDouble(request.getSto_latitude());
+            double stoLongitude = Double.parseDouble(request.getSto_longitude());
+
+            if (stoLatitude < 0 || stoLatitude > 90 || stoLongitude < 0 || stoLongitude > 180) {
+                response.setMsg("无效的配送位置坐标");
+                return response;
+            }
+
+            // 其他业务逻辑
+
+        } catch (NumberFormatException e) {
+            response.setMsg("错误的经纬度格式");
             return response;
         }
 
