@@ -26,14 +26,14 @@ public class UserLoginService {
     public UserLoginResponseDTO UserLogin(UserLoginRequestDTO requestDTO){
         UserLoginResponseDTO responseDTO=new UserLoginResponseDTO();
         UserEntity targetUser=userLoginRepository.findByUserPhone(requestDTO.getUser_phone());
+        if (!isValidPhoneNumber(requestDTO.getUser_phone())) {
+            responseDTO.setUser_type(-1);
+            responseDTO.setMsg("电话格式错误");
+            responseDTO.setUser_id(-1);
+            return responseDTO;
+        }
         if (targetUser!=null){
-
-            if (!isValidPhoneNumber(requestDTO.getUser_phone())) {
-                responseDTO.setUser_type(-1);
-                responseDTO.setMsg("电话格式错误");
-                responseDTO.setUser_id(-1);
-            }
-            else if(targetUser.getUserPassword().equals(requestDTO.getUser_password()))
+            if(targetUser.getUserPassword().equals(requestDTO.getUser_password()))
             {
                 responseDTO.setUser_type(targetUser.getUserType());
                 responseDTO.setMsg("登录成功");
