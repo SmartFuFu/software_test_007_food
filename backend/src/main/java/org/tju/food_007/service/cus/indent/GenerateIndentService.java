@@ -28,8 +28,6 @@ public class GenerateIndentService {
     @Autowired
     GenerateIndentComRepository generateIndentComRepository;
     @Autowired
-    UserLoginRepository userLoginRepository;
-    @Autowired
     UserUploadLogoImageUserRepository userUploadLogoImageUserRepository;
     @Autowired
     CommodityDetailRepository commodityDetailRepository;
