@@ -84,7 +84,7 @@ public class GenerateIndentService {
         }
         CommodityEntity aimed_com = commodityDetailRepository.findByComId(Integer.valueOf(requestDTO.getCom_arr().getFirst().getCom_id()));
         if (aimed_com == null) {
-            return String.format("商品ID %s不存在", requestDTO.getCom_arr().getFirst().getCom_id());
+            return "商品ID不存在";
         }
         newIndent.setStoId(aimed_com.getStoId());
         IndentEntity inserted_ind = generateIndentRepository.save(newIndent);
@@ -96,7 +96,7 @@ public class GenerateIndentService {
             newCom.setRatingType(1);
             CommodityEntity aim_com = commodityDetailRepository.findByComId(newCom.getComId());
             if (aim_com == null) {
-                return String.format("商品ID %s不存在", com.getCom_id());
+                return "商品ID不存在";
             }
             aim_com.setComLeft(aim_com.getComLeft() - Integer.parseInt(com.getInd_quantity()));
             commodityDetailRepository.save(aim_com);
@@ -109,7 +109,7 @@ public class GenerateIndentService {
     private String validateGenerateIndentRequest(GenerateIndentRequestDTO requestDTO) {
         try {
             int cusId = Integer.parseInt(requestDTO.getCus_Id());
-            if (cusId <= 0) throw new NumberFormatException("无效的客户ID");
+            if (cusId <= 0||cusId>1000000) throw new NumberFormatException("无效的客户ID");
         } catch (NumberFormatException e) {
             return "无效的客户ID";
         }
@@ -134,7 +134,7 @@ public class GenerateIndentService {
         for (IndentCommodity com : requestDTO.getCom_arr()) {
             try {
                 int comId = Integer.parseInt(com.getCom_id());
-                if (comId <= 0) throw new NumberFormatException("无效的商品ID");
+                if (comId <= 0||comId>1000000) throw new NumberFormatException("无效的商品ID");
             } catch (NumberFormatException e) {
                 return "无效的商品ID";
             }

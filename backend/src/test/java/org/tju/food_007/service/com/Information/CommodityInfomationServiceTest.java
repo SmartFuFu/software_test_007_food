@@ -2,6 +2,8 @@ package org.tju.food_007.service.com.Information;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +21,8 @@ import org.tju.food_007.dto.com.CommodityPriceCurveResponseDTO;
 import org.tju.food_007.repository.com.Information.CommodityDetailRepository;
 import org.tju.food_007.repository.pub.login.UserLoginRepository;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -118,141 +122,94 @@ class CommodityInfomationServiceTest {
         }
     }
 
-    private Stream<Arguments> GetCommodityDetailProvider() {
+    private Stream<Arguments> GetCommodityDetailProvider() throws IOException, CsvValidationException {
+        String filePath = "src/test/resources/Unit_003_002_002.csv";
+        List<Arguments> argumentsList = new ArrayList<>();
 
-        return Stream.of(
-                Arguments.of("Unit_003_002_001_001_001",Unit_003_002_001_001_001_input,Unit_003_002_001_001_001_output()),
-                Arguments.of("Unit_003_002_001_001_002",Unit_003_002_001_001_002_input,Unit_003_002_001_001_002_output()),
-                Arguments.of("Unit_003_002_001_002_001",Unit_003_002_001_002_001_input,Unit_003_002_001_002_001_output()),
-                Arguments.of("Unit_003_002_001_003_001",Unit_003_002_001_003_001_input,Unit_003_002_001_003_001_output()),
-                Arguments.of("Unit_003_002_001_004_001",Unit_003_002_001_004_001_input,Unit_003_002_001_004_001_output())
-        );
+        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
+            String[] values;
+            while ((values = csvReader.readNext()) != null) {
+                if (values[0].equals("test_case_id")) {
+                    continue; // Skip header row
+                }
+                String testCaseId = values[0];
+                Integer input = Integer.parseInt(values[1]);
+
+                CommodityDetailDTO output = new CommodityDetailDTO();
+                output.setCom_ID(Integer.parseInt(values[2]));
+                output.setCom_name(values[3].isEmpty() ? null : values[3]);
+                output.setCom_introduction(values[4].isEmpty() ? null : values[4]);
+                output.setCom_uploadDate(values[5].isEmpty() ? null : values[5]);
+                output.setCom_left(Integer.parseInt(values[6]));
+                output.setSto_ID(Integer.parseInt(values[7]));
+                output.setCom_type(Integer.parseInt(values[8]));
+                output.setCom_oriPrice(Double.parseDouble(values[9]));
+                output.setPraise_rate(Double.parseDouble(values[10]));
+                output.setCom_expirationDate(values[11].isEmpty() ? null : values[11]);
+                output.setCom_producedDate(values[12].isEmpty() ? null : values[12]);
+                output.setCommodityPriceCurve(values[13].isEmpty() ? null : parseCommodityPriceCurve(values[13]));
+                output.setCommodityImage(values[14].isEmpty() ? null : parseCommodityImage(values[14]));
+                output.setCommodity_categories(values[15].isEmpty() ? null : parseCommodityCategories(values[15]));
+                output.setSto_openingTime(values[16].isEmpty() ? null : values[16]);
+                output.setSto_closingTime(values[17].isEmpty() ? null : values[17]);
+
+                argumentsList.add(Arguments.of(testCaseId, input, output));
+            }
+        }
+
+        return argumentsList.stream();
+    }
+    private CommodityPriceCurveResponseDTO[] parseCommodityPriceCurve(String value) {
+        if (value == null || value.isEmpty()) {
+            return new CommodityPriceCurveResponseDTO[0];
+        }
+
+        // Example format: [CommodityPriceCurveResponseDTO(2024-03-15 00:00:00.0, 37.0), CommodityPriceCurveResponseDTO(2024-04-01 00:00:00.0, 27.0)]
+        String[] parts = value.substring(1, value.length() - 1).split("\\), CommodityPriceCurveResponseDTO\\(");
+        List<CommodityPriceCurveResponseDTO> list = new ArrayList<>();
+
+        for (String part : parts) {
+            String[] fields = part.replace("CommodityPriceCurveResponseDTO(", "").replace(")", "").split(", ");
+            list.add(new CommodityPriceCurveResponseDTO(fields[0], Double.parseDouble(fields[1])));
+        }
+
+        return list.toArray(new CommodityPriceCurveResponseDTO[0]);
     }
 
+    private CommodityImageResponseDTO[] parseCommodityImage(String value) {
+        if (value == null || value.isEmpty()) {
+            return new CommodityImageResponseDTO[0];
+        }
 
-    private Integer Unit_003_002_001_001_001_input = 0;
-    private Integer Unit_003_002_001_001_002_input = -1;
-    private Integer Unit_003_002_001_002_001_input = 5;
-    private Integer Unit_003_002_001_003_001_input = 1000001;
-    private Integer Unit_003_002_001_004_001_input = 112;
+        // Example format: [CommodityImageResponseDTO(commodity_image/112_0.jpg)]
+        String[] parts = value.substring(1, value.length() - 1).split("\\), CommodityImageResponseDTO\\(");
+        List<CommodityImageResponseDTO> list = new ArrayList<>();
 
+        for (String part : parts) {
+            String image = part.replace("CommodityImageResponseDTO(", "").replace(")", "");
+            list.add(new CommodityImageResponseDTO(image));
+        }
 
-
-    private static CommodityDetailDTO Unit_003_002_001_001_001_output() {
-        CommodityDetailDTO output = new CommodityDetailDTO();
-        output.setCom_ID(-1);
-        output.setCom_name(null);
-        output.setCom_introduction(null);
-        output.setCom_uploadDate(null);
-        output.setCom_left(0);
-        output.setSto_ID(0);
-        output.setCom_type(0);
-        output.setCom_oriPrice(0.0);
-        output.setPraise_rate(0.0);
-        output.setCom_expirationDate(null);
-        output.setCom_producedDate(null);
-        output.setCommodityPriceCurve(null);
-        output.setCommodityImage(null);
-        output.setCommodity_categories(null);
-        output.setSto_openingTime(null);
-        output.setSto_closingTime(null);
-        return output;
+        return list.toArray(new CommodityImageResponseDTO[0]);
     }
-    private static CommodityDetailDTO Unit_003_002_001_001_002_output() {
-        CommodityDetailDTO output = new CommodityDetailDTO();
-        output.setCom_ID(-1);
-        output.setCom_name(null);
-        output.setCom_introduction(null);
-        output.setCom_uploadDate(null);
-        output.setCom_left(0);
-        output.setSto_ID(0);
-        output.setCom_type(0);
-        output.setCom_oriPrice(0.0);
-        output.setPraise_rate(0.0);
-        output.setCom_expirationDate(null);
-        output.setCom_producedDate(null);
-        output.setCommodityPriceCurve(null);
-        output.setCommodityImage(null);
-        output.setCommodity_categories(null);
-        output.setSto_openingTime(null);
-        output.setSto_closingTime(null);
-        return output;
+
+    private CommodityCategoriesResponseDTO[] parseCommodityCategories(String value) {
+        if (value == null || value.isEmpty()) {
+            return new CommodityCategoriesResponseDTO[0];
+        }
+
+        // Example format: [CommodityCategoriesResponseDTO(零食)]
+        String[] parts = value.substring(1, value.length() - 1).split("\\), CommodityCategoriesResponseDTO\\(");
+        List<CommodityCategoriesResponseDTO> list = new ArrayList<>();
+
+        for (String part : parts) {
+            String category = part.replace("CommodityCategoriesResponseDTO(", "").replace(")", "");
+            list.add(new CommodityCategoriesResponseDTO(category));
+        }
+
+        return list.toArray(new CommodityCategoriesResponseDTO[0]);
     }
-    private static CommodityDetailDTO Unit_003_002_001_002_001_output() {
-        CommodityDetailDTO output = new CommodityDetailDTO();
-        output.setCom_ID(-1);
-        output.setCom_name(null);
-        output.setCom_introduction(null);
-        output.setCom_uploadDate(null);
-        output.setCom_left(0);
-        output.setSto_ID(0);
-        output.setCom_type(0);
-        output.setCom_oriPrice(0.0);
-        output.setPraise_rate(0.0);
-        output.setCom_expirationDate(null);
-        output.setCom_producedDate(null);
-        output.setCommodityPriceCurve(null);
-        output.setCommodityImage(null);
-        output.setCommodity_categories(null);
-        output.setSto_openingTime(null);
-        output.setSto_closingTime(null);
-        return output;
-    }
-    private static CommodityDetailDTO Unit_003_002_001_003_001_output() {
-        CommodityDetailDTO output = new CommodityDetailDTO();
-        output.setCom_ID(-1);
-        output.setCom_name(null);
-        output.setCom_introduction(null);
-        output.setCom_uploadDate(null);
-        output.setCom_left(0);
-        output.setSto_ID(0);
-        output.setCom_type(0);
-        output.setCom_oriPrice(0.0);
-        output.setPraise_rate(0.0);
-        output.setCom_expirationDate(null);
-        output.setCom_producedDate(null);
-        output.setCommodityPriceCurve(null);
-        output.setCommodityImage(null);
-        output.setCommodity_categories(null);
-        output.setSto_openingTime(null);
-        output.setSto_closingTime(null);
-        return output;
-    }
-    private static CommodityDetailDTO Unit_003_002_001_004_001_output() {
-        CommodityDetailDTO output = new CommodityDetailDTO();
-        output.setCom_ID(112);
-        output.setCom_name("脆升升香脆薯条20g*25袋鲜切薯片蜂");
-        output.setCom_introduction("脆升升香脆薯条是一款美味可口的零食选择。每袋20克的鲜切薯片，经过独特工艺制作，口感脆爽，外表金黄诱人。薯片以蜂蜜黄油调味，带来香甜可口的味道，让您享受到独特的美味体验。小包装设计，方便携带，是您随时随地享用的零食伴侣。无论是在工作间隙还是下午茶时光，脆升升香脆薯条都能为您带来愉悦的零食时刻。");
-        output.setCom_uploadDate("2024-04-14 12:14:19.0");
-        output.setCom_left(0);
-        output.setSto_ID(39);
-        output.setCom_type(0);
-        output.setCom_oriPrice(39.8);
-        output.setPraise_rate(100.0);
-        output.setCom_expirationDate("2024-04-15 00:00:00.0");
-        output.setCom_producedDate("2023-04-15 00:00:00.0");
 
-        CommodityPriceCurveResponseDTO[] priceCurve = {
-                new CommodityPriceCurveResponseDTO("2024-03-15 00:00:00.0", 37.0),
-                new CommodityPriceCurveResponseDTO("2024-04-01 00:00:00.0", 27.0)
-        };
-        output.setCommodityPriceCurve(priceCurve);
-
-        CommodityImageResponseDTO[] images = {
-                new CommodityImageResponseDTO("commodity_image/112_0.jpg")
-        };
-        output.setCommodityImage(images);
-
-        CommodityCategoriesResponseDTO[] categories = {
-                new CommodityCategoriesResponseDTO("零食")
-        };
-        output.setCommodity_categories(categories);
-
-        output.setSto_openingTime("08:30:00");
-        output.setSto_closingTime("20:30:00");
-
-        return output;
-    }
 
 
 }
