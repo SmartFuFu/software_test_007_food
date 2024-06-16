@@ -52,7 +52,7 @@ public class UserLoginServiceTest {
         String expectedJson = objectMapper.writeValueAsString(expectedResult);
         String actualJson = objectMapper.writeValueAsString(realResult);
 
-        assertEquals(expectedJson,actualJson);
+        assertEquals(expectedJson, actualJson);
     }
 
     private void mockUserLoginRepository(UserLoginRequestDTO requestDTO) {
@@ -94,97 +94,5 @@ public class UserLoginServiceTest {
                     expectedResult.setUser_id(Integer.valueOf(parts[5]));
                     return Arguments.of(testCaseId, requestDTO, expectedResult);
                 });
-    }
-//    private Stream<Arguments> userLoginProvider() {
-//        return Stream.of(
-//                Arguments.of("Unit_001_002_001_001_001", Unit_001_002_001_001_001_input(), Unit_001_002_001_001_001_output()),
-//                Arguments.of("Unit_001_002_001_002_001", Unit_001_002_001_002_001_input(), Unit_001_002_001_002_001_output()),
-//                Arguments.of("Unit_001_002_001_002_002", Unit_001_002_001_002_002_input(), Unit_001_002_001_002_002_output()),
-//                Arguments.of("Unit_001_002_001_003_001", Unit_001_002_001_003_001_input(), Unit_001_002_001_003_001_output()),
-//                Arguments.of("Unit_001_002_001_003_002", Unit_001_002_001_003_002_input(), Unit_001_002_001_003_002_output()),
-//                Arguments.of("Unit_001_002_001_004_001", Unit_001_002_001_004_001_input(), Unit_001_002_001_004_001_output())
-//        );
-//    }
-
-    // 下面进行用例输入和期望输出编辑
-    private static UserLoginRequestDTO Unit_001_002_001_001_001_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("10086");
-        input.setUser_password("111111");
-        return input;
-    }
-
-    private static UserLoginRequestDTO Unit_001_002_001_002_001_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("13837829689");
-        input.setUser_password("123456");
-        return input;
-    }
-    private static UserLoginRequestDTO Unit_001_002_001_002_002_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("15821295304");
-        input.setUser_password("123456");
-        return input;
-    }
-    private static UserLoginRequestDTO Unit_001_002_001_003_001_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("13837829689");
-        input.setUser_password("111111");
-        return input;
-    }
-    private static UserLoginRequestDTO Unit_001_002_001_003_002_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("15821295304");
-        input.setUser_password("654321");
-        return input;
-    }
-    private static UserLoginRequestDTO Unit_001_002_001_004_001_input(){
-        UserLoginRequestDTO input = new UserLoginRequestDTO();
-        input.setUser_phone("15899583310");
-        input.setUser_password("123456");
-        return input;
-    }
-    // expected outputs
-    private static UserLoginResponseDTO Unit_001_002_001_001_001_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("电话格式错误");
-        output.setUser_type(-1);
-        output.setUser_id(-1);
-        return output;
-    }
-    private static UserLoginResponseDTO Unit_001_002_001_002_001_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("登录成功");
-        output.setUser_type(0);
-        output.setUser_id(1);
-        return output;
-    }
-    private static UserLoginResponseDTO Unit_001_002_001_002_002_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("登录成功");
-        output.setUser_type(1);
-        output.setUser_id(2);
-        return output;
-    }
-    private static UserLoginResponseDTO Unit_001_002_001_003_001_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("密码错误");
-        output.setUser_type(-1);
-        output.setUser_id(-1);
-        return output;
-    }
-    private static UserLoginResponseDTO Unit_001_002_001_003_002_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("密码错误");
-        output.setUser_type(-1);
-        output.setUser_id(-1);
-        return output;
-    }
-    private static UserLoginResponseDTO Unit_001_002_001_004_001_output(){
-        UserLoginResponseDTO output = new UserLoginResponseDTO();
-        output.setMsg("账号不存在");
-        output.setUser_type(-1);
-        output.setUser_id(-1);
-        return output;
     }
 }
