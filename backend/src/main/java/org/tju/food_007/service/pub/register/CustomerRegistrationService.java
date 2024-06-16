@@ -168,7 +168,7 @@ public class CustomerRegistrationService {
     }
 
     private boolean isValidNickname(String nickname) {
-        return nickname != null && nickname.length() < 10;
+        return nickname != null && nickname.length() < 10 && nickname.length() > 0;
     }
 
     private boolean isValidPayPassword(String payPassword) {

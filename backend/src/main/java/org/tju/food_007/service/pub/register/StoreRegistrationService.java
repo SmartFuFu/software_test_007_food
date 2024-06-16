@@ -37,35 +37,49 @@ public class StoreRegistrationService {
 
         if (!isValidPhoneNumber(request.getUser_phone())) {
             response.setMsg("电话号码格式不正确，必须为11位数字");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
-        if (request.getSto_name().isEmpty() ||request.getSto_name().length()>20) {
+        if (request.getSto_name().isEmpty() || request.getSto_name().length() > 20 || request.getSto_name().length() <= 0) {
             response.setMsg("商家名称长度不正确");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
         if (request.getUser_address().isEmpty()) {
             response.setMsg("商家地址不为空");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
         if (!isValidPassword(request.getUser_password())) {
             response.setMsg("密码长度必须不低于6位，并且包含字母、数字和特殊符号");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
         if (!isValidGender(request.getUser_gender())) {
             response.setMsg("性别必须为0或1");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
         if (!isValidIntroduction(request.getSto_introduction())) {
             response.setMsg("介绍长度必须不超过50个字符");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
         if (!isValidOpeningClosingTime(request.getSto_openingTime().toString(), request.getSto_closingTime().toString())) {
             response.setMsg("关门时间必须晚于开门时间");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
         try {
@@ -74,6 +88,8 @@ public class StoreRegistrationService {
 
             if (stoLatitude < 0 || stoLatitude > 90 || stoLongitude < 0 || stoLongitude > 180) {
                 response.setMsg("无效的配送位置坐标");
+                response.setUser_type(1);
+                response.setUser_id(-1);
                 return response;
             }
 
@@ -81,6 +97,8 @@ public class StoreRegistrationService {
 
         } catch (NumberFormatException e) {
             response.setMsg("错误的经纬度格式");
+            response.setUser_type(1);
+            response.setUser_id(-1);
             return response;
         }
 
@@ -100,17 +118,23 @@ public class StoreRegistrationService {
         if (userRegistrationRepository.existsByUserPhone(newUser.getUserPhone())) {
             System.out.println("该号码已存在：" + newUser.getUserPhone());
             response.setMsg("该号码已存在");
+            response.setUser_type(1);
+            response.setUser_id(-1);
         } else {
             UserEntity temp = userRegistrationRepository.save(newUser);
             System.out.println("User已经存入，ID为" + temp.getUserId());
             response.setMsg("User成功注册");
-
+            System.out.println("100001");
             newSto.setStoId(temp.getUserId());
+            System.out.println("100002");
             newSto.setStoState(1);
+            System.out.println("100003");
             storeRegistrationRepository.save(newSto);
+            System.out.println("100004");
             response.setMsg("Store成功注册");
             response.setUser_type(1);
             response.setUser_id(temp.getUserId());
+            System.out.println("100005");
         }
         return response;
     }
