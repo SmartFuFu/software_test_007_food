@@ -71,7 +71,7 @@ public class CommodityInfomationService {
             List<String> images = Arrays.stream(objects.getFirst()[14].toString().split(",")).toList();
             List<CommodityImageResponseDTO> commodityImageResponseDTOS =new ArrayList<>();
             for(String image : images){
-                CommodityImageResponseDTO commodityImageResponseDTO =new CommodityImageResponseDTO();
+                CommodityImageResponseDTO commodityImageResponseDTO =new CommodityImageResponseDTO("commodity_image/112_0.jpg");
                 commodityImageResponseDTO.setCom_image(image);
                 commodityImageResponseDTOS.add(commodityImageResponseDTO);
             }
@@ -147,7 +147,7 @@ public class CommodityInfomationService {
                 List<String> images = Arrays.stream(tempObj[14].toString().split(",")).toList();
                 List<CommodityImageResponseDTO> commodityImageResponseDTOS =new ArrayList<>();
                 for(String image : images){
-                    CommodityImageResponseDTO commodityImageResponseDTO =new CommodityImageResponseDTO();
+                    CommodityImageResponseDTO commodityImageResponseDTO =new CommodityImageResponseDTO("commodity_image/112_0.jpg");
                     commodityImageResponseDTO.setCom_image(image);
                     commodityImageResponseDTOS.add(commodityImageResponseDTO);
                 }
