@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tju.food_007.dto.pub.NormalResponseDTO;
 import org.tju.food_007.dto.sto.StoUploadImageInNeedRequestDTO;
 
+import org.tju.food_007.dto.sto.UserUploadLogoImageRequestDTO;
 import org.tju.food_007.service.sto.StoUploadImageInNeedService;
+import org.tju.food_007.service.sto.UserUploadLogoImageService;
 
 import java.io.IOException;
 
@@ -33,6 +35,16 @@ public class StoUploadImageInNeedController {
     @RequestMapping("/uploadStoLicense")
     public ResponseEntity<NormalResponseDTO> StoreUploadLicenseImage(@ModelAttribute StoUploadImageInNeedRequestDTO formDTO) throws IOException {
         stoUploadImageInNeedService.UploadStoLicenseImage(formDTO);
+        NormalResponseDTO responseDTO=new NormalResponseDTO();
+        responseDTO.setMsg("success");
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @Autowired
+    UserUploadLogoImageService userUploadLogoImageService;
+    @RequestMapping("/uploadLogoImage")
+    public ResponseEntity<NormalResponseDTO> StoreUploadImage(@ModelAttribute UserUploadLogoImageRequestDTO formDTO) throws IOException {
+        userUploadLogoImageService.userUploadLogo(formDTO);
         NormalResponseDTO responseDTO=new NormalResponseDTO();
         responseDTO.setMsg("success");
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);

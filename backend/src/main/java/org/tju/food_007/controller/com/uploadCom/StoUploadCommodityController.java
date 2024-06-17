@@ -1,4 +1,4 @@
-package org.tju.food_007.controller.sto;
+package org.tju.food_007.controller.com.uploadCom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import org.tju.food_007.dto.sto.*;
-import org.tju.food_007.service.sto.StoUploadCommodityService;
+import org.tju.food_007.service.com.uploadCom.StoUploadCommodityService;
 
 import java.io.IOException;
 import java.text.ParseException;

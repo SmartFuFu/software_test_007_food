@@ -1,4 +1,4 @@
-package org.tju.food_007.service.sto;
+package org.tju.food_007.service.com.uploadCom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

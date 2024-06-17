@@ -12,6 +12,7 @@ import org.tju.food_007.dto.com.CommodityDetailDTO;
 import org.tju.food_007.dto.com.CommodityStatisticsDTO;
 import org.tju.food_007.dto.com.GetCommodityListRequestDTO;
 import org.tju.food_007.service.com.Information.CommodityInfomationService;
+import org.tju.food_007.service.com.Information.GetCommodityCategoryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,14 @@ public class CommodityInformationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Autowired
+    GetCommodityCategoryService getCommodityCategoryService;
+    @RequestMapping("/getCategories")
+    public ResponseEntity<ArrayList<String>> GetCommodityCategory(){
+        ArrayList<String> list=getCommodityCategoryService.getCommodityCategory();
+        return new ResponseEntity<>( list, HttpStatus.OK);
+
+    }
 
 
 }
