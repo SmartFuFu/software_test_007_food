@@ -25,7 +25,7 @@ public class ObsOperationTool {
      * @return 该路径是否存在
      */
     public static boolean isObjectPathExist(String objectPath){
-        return obsClient.doesObjectExist("007-food",objectPath);
+        return obsClient.doesObjectExist("software-test",objectPath);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ObsOperationTool {
             System.out.println("文件夹已经存在!");
             return false;
         }
-        PutObjectResult result = obsClient.putObject("007-food",newFolderPath,new ByteArrayInputStream(new byte[0]));
+        PutObjectResult result = obsClient.putObject("software-test",newFolderPath,new ByteArrayInputStream(new byte[0]));
         if(result.getStatusCode()==200) return true;
         else{
             System.out.println("文件夹创建失败！");
@@ -83,7 +83,7 @@ public class ObsOperationTool {
             System.out.println("文件已经存在!");
             return false;
         }
-        PutObjectResult result = obsClient.putObject("007-food",objectPath,inputStream);
+        PutObjectResult result = obsClient.putObject("software-test",objectPath,inputStream);
         if(result.getStatusCode()==200) return true;
         else{
             System.out.println("文件上传失败！");
@@ -114,7 +114,7 @@ public class ObsOperationTool {
             System.out.println("文件已经存在!");
             return false;
         }
-        PutObjectResult result = obsClient.putObject("007-food",objectPath,new File(filePath));
+        PutObjectResult result = obsClient.putObject("software-test",objectPath,new File(filePath));
         if(result.getStatusCode()==200) return true;
         else{
             System.out.println("文件上传失败！");
@@ -136,7 +136,7 @@ public class ObsOperationTool {
             System.out.println("父文件夹不存在!");
             return null;
         }
-        ListObjectsRequest request = new ListObjectsRequest("007-food");
+        ListObjectsRequest request = new ListObjectsRequest("software-test");
         // 设置文件夹对象名为前缀
         request.setPrefix(folderPath);
         request.setMaxKeys(1000);
@@ -186,21 +186,21 @@ public class ObsOperationTool {
         }
         DeleteObjectResult result;
         if(isFolder){
-            ListObjectsRequest listObjectsRequest = new ListObjectsRequest("007-food");
+            ListObjectsRequest listObjectsRequest = new ListObjectsRequest("software-test");
             listObjectsRequest.setPrefix(objectPath);
 
             // 列出文件夹中的所有对象
             ObjectListing objectListing = obsClient.listObjects(listObjectsRequest);
             for (ObsObject obsObject : objectListing.getObjects()) {
                 // 删除每个对象
-                obsClient.deleteObject("007-food", obsObject.getObjectKey());
+                obsClient.deleteObject("software-test", obsObject.getObjectKey());
             }
 
             // 删除文件夹本身
-            result = obsClient.deleteObject("007-food", objectPath);
+            result = obsClient.deleteObject("software-test", objectPath);
         }
         else{
-            result = obsClient.deleteObject("007-food",objectPath);
+            result = obsClient.deleteObject("software-test",objectPath);
         }
         if(result.getStatusCode()==204) return true;
         else{
@@ -219,7 +219,7 @@ public class ObsOperationTool {
             System.out.println("文件已经存在!");
             return false;
         }
-        PutObjectResult result = obsClient.putObject("007-food",dstPath,obsClient.getObject("007-food",srcPath).getObjectContent());
+        PutObjectResult result = obsClient.putObject("software-test",dstPath,obsClient.getObject("software-test",srcPath).getObjectContent());
         if(result.getStatusCode()==200)
             return true;
         else{
