@@ -26,17 +26,16 @@ public class StoUploadImageInNeedController {
     StoUploadImageInNeedService stoUploadImageInNeedService;
     @RequestMapping("/uploadStoImage")
     public ResponseEntity<NormalResponseDTO> StoreUploadImage(@ModelAttribute StoUploadImageInNeedRequestDTO formDTO) throws IOException {
-        stoUploadImageInNeedService.UploadStoImage(formDTO);
+
         NormalResponseDTO responseDTO=new NormalResponseDTO();
-        responseDTO.setMsg("success");
+        responseDTO.setMsg( stoUploadImageInNeedService.UploadStoImage(formDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @RequestMapping("/uploadStoLicense")
     public ResponseEntity<NormalResponseDTO> StoreUploadLicenseImage(@ModelAttribute StoUploadImageInNeedRequestDTO formDTO) throws IOException {
-        stoUploadImageInNeedService.UploadStoLicenseImage(formDTO);
         NormalResponseDTO responseDTO=new NormalResponseDTO();
-        responseDTO.setMsg("success");
+        responseDTO.setMsg(stoUploadImageInNeedService.UploadStoLicenseImage(formDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
@@ -44,9 +43,9 @@ public class StoUploadImageInNeedController {
     UserUploadLogoImageService userUploadLogoImageService;
     @RequestMapping("/uploadLogoImage")
     public ResponseEntity<NormalResponseDTO> StoreUploadImage(@ModelAttribute UserUploadLogoImageRequestDTO formDTO) throws IOException {
-        userUploadLogoImageService.userUploadLogo(formDTO);
+
         NormalResponseDTO responseDTO=new NormalResponseDTO();
-        responseDTO.setMsg("success");
+        responseDTO.setMsg(userUploadLogoImageService.userUploadLogo(formDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 

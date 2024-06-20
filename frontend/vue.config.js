@@ -5,7 +5,8 @@ const { plugins } = require("eslint-plugin-vue/lib/configs/base");
 // import globalData from "../../global.js"
 const fs=require('fs')
 // const BaseUrl = "http://119.3.153.217:8002"
-const BaseUrl = "http://124.70.156.23:8002"
+// const BaseUrl = "http://124.70.156.23:8002"
+const BaseUrl = "http://119.8.2.234:8082"
 // const BaseUrl="http://localhost:8002"
 // const BaseUrl = "http://100.80.74.33:8002"
 

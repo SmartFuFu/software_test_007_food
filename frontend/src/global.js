@@ -146,6 +146,8 @@ const mapObj={
     }
 }
 // const BaseUrl = "http://124.70.156.23:8002"
-const BaseUrl = "http://localhost:8002"
+// const BaseUrl = "http://localhost:8002"
+// const BaseUrl = "http://localhost:8082"
+const BaseUrl = "http://119.8.2.234:8082"
 // const BaseUrl = "http://100.80.74.33:8002"
 export default{shoppingCart,userPosition,userInfo,mapObj,BaseUrl}

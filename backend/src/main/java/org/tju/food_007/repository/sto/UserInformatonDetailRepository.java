@@ -5,4 +5,5 @@ import org.tju.food_007.model.UserEntity;
 
 public interface UserInformatonDetailRepository extends JpaRepository<UserEntity,Integer> {
     boolean existsByUserId(Integer id);
+    UserEntity findByUserId(Integer id);
 }

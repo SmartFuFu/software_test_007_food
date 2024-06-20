@@ -8,6 +8,7 @@ import org.tju.food_007.dto.sto.UserUploadLogoImageRequestDTO;
 import org.tju.food_007.model.CustomerEntity;
 import org.tju.food_007.model.StoreEntity;
 import org.tju.food_007.model.UserEntity;
+import org.tju.food_007.repository.sto.UserInformatonDetailRepository;
 import org.tju.food_007.repository.sto.UserUploadLogoImageCusRepository;
 import org.tju.food_007.repository.sto.UserUploadLogoImageStoreRepository;
 import org.tju.food_007.repository.sto.UserUploadLogoImageUserRepository;
@@ -31,7 +32,13 @@ public class UserUploadLogoImageService {
 
     @Autowired
     UserUploadLogoImageCusRepository userUploadLogoImageCusRepository;
-    public void userUploadLogo(UserUploadLogoImageRequestDTO requestDTO) throws IOException {
+
+    @Autowired
+    UserInformatonDetailRepository userInformatonDetailRepository;
+    public String userUploadLogo(UserUploadLogoImageRequestDTO requestDTO) throws IOException {
+        UserEntity aimed_user=userInformatonDetailRepository.findByUserId(requestDTO.getUser_id());
+        if(aimed_user==null)
+            return "用户id不存在";
         InputStream image_obs=requestDTO.getImage().getInputStream();
         String file_name=String.valueOf(requestDTO.getUser_id())+"_UserLogo.jpg";
         UserEntity targetUser= userUploadLogoImageUserRepository.findByUserId(requestDTO.getUser_id());
@@ -47,5 +54,7 @@ public class UserUploadLogoImageService {
             newSto.setStoLogo("sto_logo/" + file_name);
             userUploadLogoImageStoreRepository.save(newSto);
         }
+
+        return "success";
     }
 }
