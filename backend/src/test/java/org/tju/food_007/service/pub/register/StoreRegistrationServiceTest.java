@@ -2,6 +2,7 @@ package org.tju.food_007.service.pub.register;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
@@ -34,6 +35,8 @@ import static org.mockito.Mockito.when;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Epic("register模块")
+@Feature("StoreRegistrationService类")
 class StoreRegistrationServiceTest {
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -49,6 +52,7 @@ class StoreRegistrationServiceTest {
     private StoreRegistrationService storeRegistrationService;
 
     @BeforeEach
+    @Step("Set up the test environment and initialize mocks")
     public void setUp() {
         System.out.println("开始测试");
         MockitoAnnotations.openMocks(this);
@@ -57,6 +61,11 @@ class StoreRegistrationServiceTest {
     @ParameterizedTest(name = "测试用例 {0}")
     @MethodSource("userRegistrationProvider")
     @DisplayName("测试用户登录服务类")
+    @Story("Unit_002_001_002")
+    @Description("测试StoreRegistrationService.StoreRegister方法")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link(name = "Test Link", url = "http://testlink.com")
+    @Step("Executing test case {0}")
     public void testStoreRegister(String testCaseId, StoreRegistrationRequestDTO requestDTO, CustomRegistrationResponseDTO expectedResult) throws JsonProcessingException {
         mockRepositories(requestDTO);
 
@@ -67,6 +76,7 @@ class StoreRegistrationServiceTest {
         assertEquals(expectedJson, actualJson);
     }
 
+    @Step("Mocking user login repository with request: {requestDTO}")
     private void mockRepositories(StoreRegistrationRequestDTO requestDTO) {
         UserEntity userEntity = new UserEntity();
         StoreEntity storeEntity = new StoreEntity();
@@ -111,6 +121,7 @@ class StoreRegistrationServiceTest {
         return readTestCasesFromCsv("src/test/resources/Unit_002_003_001.csv");
     }
 
+    @Step("Reading test cases from CSV file: {filePath}")
     private static Stream<Arguments> readTestCasesFromCsv(String filePath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         return reader.lines()

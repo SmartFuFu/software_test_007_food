@@ -29,6 +29,12 @@ public class UserLoginController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/drive",method = RequestMethod.POST)
+    public ResponseEntity<UserLoginResponseDTO> UserLoginDrive(@RequestBody UserLoginRequestDTO requestDTO){
+        UserLoginResponseDTO responseDTO=userLoginService.UserLogin(requestDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/quit",method = RequestMethod.POST)
     public ResponseEntity<UserQuitResponseDTO> UserQuit(@RequestBody UserQuitRequestDTO requestDTO){
         UserQuitResponseDTO responseDTO=new UserQuitResponseDTO();

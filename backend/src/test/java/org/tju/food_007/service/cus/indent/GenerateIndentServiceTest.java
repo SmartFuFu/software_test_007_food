@@ -2,6 +2,7 @@ package org.tju.food_007.service.cus.indent;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +39,8 @@ import static org.mockito.Mockito.when;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Epic("customer indent模块")
+@Feature("GenerateIndentService类")
 class GenerateIndentServiceTest {
     @Mock
     private GenerateIndentRepository generateIndentRepository;
@@ -59,6 +62,7 @@ class GenerateIndentServiceTest {
 
 
     @BeforeEach
+    @Step("Set up the test environment and initialize mocks")
     public void setUp() {
         System.out.println("开始测试");
         MockitoAnnotations.openMocks(this); //打开Mock
@@ -71,6 +75,11 @@ class GenerateIndentServiceTest {
     @ParameterizedTest(name = "测试用例 {0}")
     @MethodSource("GenerateIndentProvider")
     @DisplayName("Unit_004_002_001_生成订单测试用例")
+    @Story("Unit_004_002_001")
+    @Description("测试GenerateIndentService.GenerateIndent方法")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link(name = "Test Link", url = "http://testlink.com")
+    @Step("Executing test case {0}")
     public void testGenerateIndent(String testCaseId,GenerateIndentRequestDTO input ,String expect_output, boolean isBalance){
         mockUserUploadLogoImageUserRepository(Integer.parseInt(input.getCus_Id()),isBalance);
         mockGenerateIndentRepository();

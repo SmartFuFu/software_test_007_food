@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,8 @@ import static org.mockito.Mockito.when;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Epic("commodity information模块")
+@Feature("CommodityInfomationService类")
 class CommodityInfomationServiceTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -43,6 +46,7 @@ class CommodityInfomationServiceTest {
     private CommodityInfomationService commodityInfomationService;
 
     @BeforeEach
+    @Step("Set up the test environment and initialize mocks")
     public void setUp() {
         System.out.println("开始测试");
         MockitoAnnotations.openMocks(this); //打开Mock
@@ -56,6 +60,11 @@ class CommodityInfomationServiceTest {
     @ParameterizedTest(name = "测试用例 {0}")
     @MethodSource("GetCommodityDetailProvider")
     @DisplayName("Unit_003_002_001_测试获取商品详情")
+    @Story("Unit_003_002_001")
+    @Description("测试CommodityInfomationService.GetCommodityDetail方法")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link(name = "Test Link", url = "http://testlink.com")
+    @Step("Executing test case {0}")
     public void testGetCommodityDetail(String testCaseId, Integer com_id, CommodityDetailDTO expect_result) throws JsonProcessingException {
         mockCommodityDetailRepository(com_id);
 
