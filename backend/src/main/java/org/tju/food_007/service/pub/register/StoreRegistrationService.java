@@ -155,7 +155,7 @@ public class StoreRegistrationService {
     private boolean isValidIntroduction(String introduction) {
         return introduction != null && introduction.length() <= 50;
     }
-    
+
     private boolean isValidOpeningClosingTime(String openingTime, String closingTime) {
         try {
             LocalTime open = LocalTime.parse(openingTime);
