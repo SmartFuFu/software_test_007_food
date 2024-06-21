@@ -107,19 +107,8 @@ public class GenerateIndentService {
     }
 
     private String validateGenerateIndentRequest(GenerateIndentRequestDTO requestDTO) {
-        try {
-            int cusId = Integer.parseInt(requestDTO.getCus_Id());
-            if (cusId <= 0||cusId>1000000) throw new NumberFormatException("无效的客户ID");
-        } catch (NumberFormatException e) {
-            return "无效的客户ID";
-        }
-
         if (requestDTO.getInd_notes().length() > 50) {
             return "备注长度超出限制";
-        }
-
-        if (requestDTO.getDelivery_method() < 0 || requestDTO.getDelivery_method() > 1) {
-            return "无效的配送方式";
         }
 
         if (requestDTO.getInd_money() < 0 || requestDTO.getInd_money() >= 10000) {

@@ -28,7 +28,7 @@ public class UserLoginService {
         UserEntity targetUser=userLoginRepository.findByUserPhone(requestDTO.getUser_phone());
         if (!isValidPhoneNumber(requestDTO.getUser_phone())) {
             responseDTO.setUser_type(-1);
-            responseDTO.setMsg("电话格式错误");
+            responseDTO.setMsg("手机号错误");
             responseDTO.setUser_id(-1);
             return responseDTO;
         }

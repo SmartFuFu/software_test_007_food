@@ -76,12 +76,6 @@ public class StoreRegistrationService {
             return response;
         }
 
-        if (!isValidOpeningClosingTime(request.getSto_openingTime().toString(), request.getSto_closingTime().toString())) {
-            response.setMsg("关门时间必须晚于开门时间");
-            response.setUser_type(1);
-            response.setUser_id(-1);
-            return response;
-        }
         try {
             double stoLatitude = Double.parseDouble(request.getSto_latitude());
             double stoLongitude = Double.parseDouble(request.getSto_longitude());
@@ -155,13 +149,4 @@ public class StoreRegistrationService {
         return introduction != null && introduction.length() <= 50;
     }
 
-    private boolean isValidOpeningClosingTime(String openingTime, String closingTime) {
-        try {
-            LocalTime open = LocalTime.parse(openingTime);
-            LocalTime close = LocalTime.parse(closingTime);
-            return close.isAfter(open);
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }
