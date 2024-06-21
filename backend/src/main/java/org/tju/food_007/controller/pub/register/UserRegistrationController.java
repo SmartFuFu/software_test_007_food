@@ -33,6 +33,8 @@ public class UserRegistrationController {
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public ResponseEntity<CustomRegistrationResponseDTO> CusRegister (@RequestBody CustomRegistrationRequestDTO request) {
         CustomRegistrationResponseDTO response=customerRegistrationService.UserRegister(request);
+        if(response.getMsg() != "顾客成功注册")
+            response.setMsg("顾客注册失败");
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 

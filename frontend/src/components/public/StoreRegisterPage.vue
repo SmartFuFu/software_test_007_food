@@ -254,6 +254,8 @@
     };
 
     const submit=()=>{
+        console.log('时间传的是');
+        console.log(transformTimeString(formData.value.sto_openingTime));       
         if(phoneStatus.value=='error'){
             baseClick(phoneError.value);
         }else if(formData.value.user_password===''){

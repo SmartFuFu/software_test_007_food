@@ -23,7 +23,7 @@ import org.tju.food_007.service.pub.login.UserLoginService;
 public class UserLoginController {
     @Autowired
     UserLoginService userLoginService;
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     public ResponseEntity<UserLoginResponseDTO> UserLogin(@RequestBody UserLoginRequestDTO requestDTO){
         UserLoginResponseDTO responseDTO=userLoginService.UserLogin(requestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
